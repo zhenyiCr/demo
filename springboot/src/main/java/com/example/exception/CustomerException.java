@@ -1,8 +1,6 @@
 package com.example.exception;
 
-import org.springframework.web.bind.annotation.ControllerAdvice;
 
-@ControllerAdvice("com.example.exception")
 public class CustomerException extends RuntimeException {
     private String code;
     private String msg;
