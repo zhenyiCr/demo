@@ -4,7 +4,7 @@
     <header class="header-container">
       <div class="logo-container">
         <el-icon class="logo-icon">
-          <LayoutDashboard />
+          <LayoutDashboard/>
         </el-icon>
         <span class="logo-text">数据管理平台</span>
       </div>
@@ -16,7 +16,7 @@
         </el-breadcrumb>
 
         <div class="header-actions">
-          <el-button size="small" icon="Search" circle class="action-btn" />
+          <el-button size="small" icon="Search" circle class="action-btn"/>
           <el-button size="small" icon="Bell" circle class="action-btn">
             <span class="notification-badge">3</span>
           </el-button>
@@ -29,25 +29,33 @@
               >
               <span class="username">管理员</span>
               <el-icon class="arrow-icon">
-                <ChevronDown />
+                <ChevronDown/>
               </el-icon>
             </div>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item>
-                  <el-icon><User /></el-icon>
+                  <el-icon>
+                    <User/>
+                  </el-icon>
                   <span>个人信息</span>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <el-icon><Lock /></el-icon>
+                  <el-icon>
+                    <Lock/>
+                  </el-icon>
                   <span>修改密码</span>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <el-icon><Settings /></el-icon>
+                  <el-icon>
+                    <Settings/>
+                  </el-icon>
                   <span>系统设置</span>
                 </el-dropdown-item>
                 <el-dropdown-item divided>
-                  <el-icon><Logout /></el-icon>
+                  <el-icon>
+                    <Logout/>
+                  </el-icon>
                   <span>退出登录</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -69,13 +77,17 @@
             :collapse-transition="false"
         >
           <el-menu-item index="/manager/home">
-            <el-icon><House /></el-icon>
+            <el-icon>
+              <House/>
+            </el-icon>
             <span>首页</span>
           </el-menu-item>
 
           <el-sub-menu index="data">
             <template #title>
-              <el-icon><Database /></el-icon>
+              <el-icon>
+                <Database/>
+              </el-icon>
               <span>数据管理</span>
             </template>
             <el-menu-item index="/manager/data/list">数据列表</el-menu-item>
@@ -85,7 +97,9 @@
 
           <el-sub-menu index="analysis">
             <template #title>
-              <el-icon><BarChart /></el-icon>
+              <el-icon>
+                <BarChart/>
+              </el-icon>
               <span>数据分析</span>
             </template>
             <el-menu-item index="/manager/analysis/overview">数据概览</el-menu-item>
@@ -95,7 +109,9 @@
 
           <el-sub-menu index="system">
             <template #title>
-              <el-icon><Setting /></el-icon>
+              <el-icon>
+                <Setting/>
+              </el-icon>
               <span>系统设置</span>
             </template>
             <el-menu-item index="/manager/system/users">用户管理</el-menu-item>
@@ -104,7 +120,9 @@
           </el-sub-menu>
 
           <el-menu-item index="/manager/help">
-            <el-icon><Help /></el-icon>
+            <el-icon>
+              <Help/>
+            </el-icon>
             <span>帮助中心</span>
           </el-menu-item>
         </el-menu>
@@ -120,12 +138,14 @@
               <div class="stat-title">总数据量</div>
               <div class="stat-value">128,546</div>
               <div class="stat-change positive">
-                <el-icon><ArrowUp /></el-icon>
+                <el-icon>
+                  <ArrowUp/>
+                </el-icon>
                 <span>12.5%</span>
               </div>
             </div>
             <div class="stat-icon primary">
-              <Database />
+              <Database/>
             </div>
           </el-card>
 
@@ -134,12 +154,14 @@
               <div class="stat-title">今日新增</div>
               <div class="stat-value">2,451</div>
               <div class="stat-change positive">
-                <el-icon><ArrowUp /></el-icon>
+                <el-icon>
+                  <ArrowUp/>
+                </el-icon>
                 <span>8.2%</span>
               </div>
             </div>
             <div class="stat-icon success">
-              <PlusSquare />
+              <PlusSquare/>
             </div>
           </el-card>
 
@@ -148,12 +170,14 @@
               <div class="stat-title">处理效率</div>
               <div class="stat-value">98.7%</div>
               <div class="stat-change negative">
-                <el-icon><ArrowDown /></el-icon>
+                <el-icon>
+                  <ArrowDown/>
+                </el-icon>
                 <span>1.3%</span>
               </div>
             </div>
             <div class="stat-icon warning">
-              <Clock />
+              <Clock/>
             </div>
           </el-card>
 
@@ -162,19 +186,21 @@
               <div class="stat-title">系统状态</div>
               <div class="stat-value">正常</div>
               <div class="stat-change positive">
-                <el-icon><CheckCircle /></el-icon>
+                <el-icon>
+                  <CheckCircle/>
+                </el-icon>
                 <span>100%</span>
               </div>
             </div>
             <div class="stat-icon info">
-              <CheckCircle />
+              <CheckCircle/>
             </div>
           </el-card>
         </div>
 
         <!-- 主内容区域 -->
         <div class="main-content">
-          <RouterView />
+          <RouterView/>
         </div>
       </main>
       <!--  数据区域结束    -->

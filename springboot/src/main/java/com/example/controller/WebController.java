@@ -5,8 +5,8 @@ import com.example.common.Result;
 import com.example.service.AdminService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.Resource;
+
 
 @RestController
 public class WebController {
@@ -22,7 +22,7 @@ public class WebController {
 
     @GetMapping("/admin")
     public Result admin(String name) {
-        String admin=adminService.adminName( name);
+        String admin=adminService.adminName(name);
         return Result.success(admin);
     }
 }
