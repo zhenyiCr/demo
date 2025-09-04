@@ -18,7 +18,7 @@
         <div class="header-actions">
           <el-button size="small" icon="Search" circle class="action-btn"/>
           <el-button size="small" icon="Bell" circle class="action-btn">
-            <span class="notification-badge">3</span>
+
           </el-button>
           <el-dropdown placement="bottom-end">
             <div class="user-info">
@@ -129,74 +129,7 @@
       </aside>
       <!--  菜单区域结束    -->
 
-      <!--  数据区域开始    -->
       <main class="content-container">
-        <!-- 示例数据卡片 -->
-        <div class="stats-cards">
-          <el-card class="stat-card" shadow="hover">
-            <div class="stat-info">
-              <div class="stat-title">总数据量</div>
-              <div class="stat-value">128,546</div>
-              <div class="stat-change positive">
-                <el-icon>
-                  <ArrowUp/>
-                </el-icon>
-                <span>12.5%</span>
-              </div>
-            </div>
-            <div class="stat-icon primary">
-              <Database/>
-            </div>
-          </el-card>
-
-          <el-card class="stat-card" shadow="hover">
-            <div class="stat-info">
-              <div class="stat-title">今日新增</div>
-              <div class="stat-value">2,451</div>
-              <div class="stat-change positive">
-                <el-icon>
-                  <ArrowUp/>
-                </el-icon>
-                <span>8.2%</span>
-              </div>
-            </div>
-            <div class="stat-icon success">
-              <PlusSquare/>
-            </div>
-          </el-card>
-
-          <el-card class="stat-card" shadow="hover">
-            <div class="stat-info">
-              <div class="stat-title">处理效率</div>
-              <div class="stat-value">98.7%</div>
-              <div class="stat-change negative">
-                <el-icon>
-                  <ArrowDown/>
-                </el-icon>
-                <span>1.3%</span>
-              </div>
-            </div>
-            <div class="stat-icon warning">
-              <Clock/>
-            </div>
-          </el-card>
-
-          <el-card class="stat-card" shadow="hover">
-            <div class="stat-info">
-              <div class="stat-title">系统状态</div>
-              <div class="stat-value">正常</div>
-              <div class="stat-change positive">
-                <el-icon>
-                  <CheckCircle/>
-                </el-icon>
-                <span>100%</span>
-              </div>
-            </div>
-            <div class="stat-icon info">
-              <CheckCircle/>
-            </div>
-          </el-card>
-        </div>
 
         <!-- 主内容区域 -->
         <div class="main-content">
