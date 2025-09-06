@@ -7,7 +7,8 @@ const router = createRouter({
         {
             path: '/manager', name: 'manager', component: import('../views/Manager.vue'),
             children: [
-                {path: 'home', name: 'home', component: import('../views/Home.vue')},
+                {path: 'home', name: 'home', component: import('../views/home.vue')},
+                {path: 'users', name: 'users', component: import('../views/users.vue')},
             ]
         },
 
