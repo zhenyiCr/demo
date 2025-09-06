@@ -3,6 +3,8 @@ package com.example.service;
 import com.example.entity.Admin;
 import com.example.exception.CustomerException;
 import com.example.mapper.AdminMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -27,4 +29,9 @@ public class AdminService {
     }
 
 
+    public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize) {
+        // 开始分页查询
+        PageHelper.startPage(pageNum, pageSize);
+        return PageInfo.of(adminMapper.selectAll());
+    }
 }

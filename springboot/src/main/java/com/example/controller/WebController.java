@@ -28,4 +28,6 @@ public class WebController {
         String admin=adminService.adminName(name);
         return Result.success(admin);
     }
+
+    
 }

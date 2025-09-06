@@ -114,7 +114,7 @@
               </el-icon>
               <span>系统设置</span>
             </template>
-            <el-menu-item index="/manager/system/users">用户管理</el-menu-item>
+            <el-menu-item index="/manager/users">用户管理</el-menu-item>
             <el-menu-item index="/manager/system/roles">角色权限</el-menu-item>
             <el-menu-item index="/manager/system/logs">操作日志</el-menu-item>
           </el-sub-menu>
@@ -168,7 +168,7 @@
   width: 240px;
   display: flex;
   align-items: center;
-  background-color: #165DFF;
+  background-color: #63dc9d;
   color: white;
   padding: 0 20px;
 }
@@ -209,7 +209,7 @@
 
 .action-btn:hover {
   background-color: #e8eaec;
-  color: #165DFF;
+  color: #8fe5b7;
 }
 
 .notification-badge {
@@ -273,7 +273,7 @@
 .sidebar-menu {
   min-height: calc(100vh - 60px);
   border-right: none;
-  background-color: #0F172A;
+  background-color: #000000;
   color: #94A3B8;
 }
 
@@ -304,9 +304,11 @@
 
 /* 内容区域样式 */
 .content-container {
+
   flex: 1;
   padding: 20px;
   overflow-y: auto;
+
 }
 
 /* 统计卡片样式 */
@@ -402,6 +404,7 @@
 }
 
 .main-content {
+  height: 830px;
   background-color: #fff;
   border-radius: 8px;
   padding: 20px;
