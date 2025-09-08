@@ -5,6 +5,12 @@
 <mapper namespace="com.example.mapper.AdminMapper">
 
     <select id="selectAll" resultType="com.example.entity.Admin">
-        select * from `admin` order by id desc
+        select * from `admin`
+        <where>
+            <if test="name != null">
+                 `name` like concat('%',#{name},'%')
+            </if>
+        </where>
+        order by id desc
     </select>
 </mapper>
