@@ -5,10 +5,10 @@ const router = createRouter({
     routes: [
         {   path: '/', redirect: '/manager/home'},
         {
-            path: '/manager', name: 'manager', component: import('../views/Manager.vue'),
+            path: '/manager', component: import('../views/Manager.vue'),
             children: [
-                {path: 'home', name: 'home', component: import('../views/home.vue')},
-                {path: 'users', name: 'users', component: import('../views/users.vue')},
+                {path: 'home',meta: {name: '主页'}, component: import('../views/home.vue')},
+                {path: 'users',meta: {name: '用户管理'}, component: import('../views/users.vue')},
             ]
         },
 

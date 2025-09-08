@@ -2,12 +2,13 @@
   <div>
     <div class="card">
       <div>
-        <el-input style="margin-right: 10px;width: 260px;margin-bottom: 7px" placeholder="请输入内容"
+        <el-input clearable @clear="getData" style="margin-right: 10px;width: 260px;margin-bottom: 7px;margin-top: 8px" placeholder="请输入内容"
                   :prefix-icon="Search"
                   v-model="data.name"></el-input>
-        <el-button type="primary">查询</el-button>
+        <el-button type="primary" @click="getData">查询</el-button>
+        <el-button @click="reset">重置</el-button>
       </div>
-      <div style="margin-bottom: 5px">
+      <div style="margin-bottom: 5px;margin-top: 5px">
         <el-button type="danger">删除</el-button>
         <el-button type="primary">新增</el-button>
         <el-button type="success">导出</el-button>
@@ -46,6 +47,7 @@ import {reactive} from "vue"
 import {Search} from "@element-plus/icons-vue";
 
 import request from "@/utils/request.js";
+import {ElMessage} from "element-plus";
 
 
 const data = reactive({
@@ -66,12 +68,19 @@ const getData = () => {
     }
       }
   ).then(res => {
-
+    if (res.code === '200')
+    {
       data.tableData = res.data.list
       data.total = res.data.total
-
+    }else {
+      ElMessage.error(res.msg)
+    }
   })
 }
 getData()
+const reset = () => {
+  data.name = null
+  getData()
+}
 
 </script>

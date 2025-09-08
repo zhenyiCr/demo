@@ -12,7 +12,7 @@
       <div class="header-content">
         <el-breadcrumb class="breadcrumb" separator="/">
           <el-breadcrumb-item :to="{ path: '/manager/home' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>数据分析</el-breadcrumb-item>
+        <span>{{ router.currentRoute.value.meta.name }}</span>
         </el-breadcrumb>
 
         <div class="header-actions">
@@ -144,7 +144,7 @@
 </template>
 
 <script setup>
-
+import router from "../router/index.js";
 </script>
 
 <style scoped>
