@@ -29,9 +29,12 @@
     <div style=": margin-top: 10px">
       <el-pagination
           v-model:current-page="data.pageNum"
-          :page-size="data.pageSize"
-          layout="total, prev, pager, next"
+          v-model:page-size="data.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :page-sizes="[5, 10, 15, 20]"
           :total="data.total"
+          @current-change="getData"
+          @size-change="getData"
       />
     </div>
   </div>
@@ -55,9 +58,17 @@ const data = reactive({
 )
 
 const getData = () => {
-  request.get('/admin/selectPage').then(res => {
-    data.tableData = res.data.list
-    data.total = res.data.total
+  request.get('/admin/selectPage',{
+    params: {
+      pageNum: data.pageNum,
+      pageSize: data.pageSize,
+      name: data.name
+    }
+      }
+  ).then(res => {
+
+      data.tableData = res.data.list
+      data.total = res.data.total
 
   })
 }

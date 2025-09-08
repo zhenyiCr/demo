@@ -32,8 +32,9 @@ public class AdminController {
     // pageSize 每页显示的条数
     @GetMapping("/selectPage")
     public Result slectPage(@RequestParam(defaultValue = "1") Integer pageNum,
-                            @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<Admin> pageInfo = adminService.selectPage(pageNum, pageSize);
+                            @RequestParam(defaultValue = "10") Integer pageSize,
+                            @RequestParam String name) {
+        PageInfo<Admin> pageInfo = adminService.selectPage(pageNum,pageSize,name);
         return Result.success(pageInfo);
     }
 }

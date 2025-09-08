@@ -25,13 +25,14 @@ public class AdminService {
     }
 
     public List<Admin> selectAll() {
-        return adminMapper.selectAll();
+        return adminMapper.selectAll(null);
     }
 
 
-    public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize) {
+    public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, String name) {
         // 开始分页查询
         PageHelper.startPage(pageNum, pageSize);
-        return PageInfo.of(adminMapper.selectAll());
+        List<Admin> admins = adminMapper.selectAll(name);
+        return PageInfo.of(admins);
     }
 }
