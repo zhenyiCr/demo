@@ -2,6 +2,7 @@ package com.example.mapper;
 
 
 import com.example.entity.Admin;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 
@@ -12,6 +13,15 @@ public interface AdminMapper {
 
     void insert(Admin admin);
 
-    @Select ("select * from 'admin' where username=#{username}")
+    @Select("select * from `admin` where username = #{username}")
     Admin selectByUsername(String username);
+
+    void update(Admin admin);
+
+    @Select("select username from `admin` where id = #{id}")
+    String selectUsername(Admin admin);
+
+
+    @Delete("delete from `admin` where id = #{id}")
+    void deleteById(Integer id);
 }

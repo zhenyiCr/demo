@@ -18,9 +18,25 @@ public class AdminController {
     @Resource
     AdminService adminService;
 
+    @GetMapping("/admin")
+    public Result admin(String username) {
+        String admin = adminService.Admin(username);
+        return Result.success(admin);
+    }
+
     @PostMapping("/add")
     public Result add(@RequestBody Admin admin) { // @RequestBody 接受前端传来的json数据
         adminService.add(admin);
+        return Result.success();
+    }
+    @DeleteMapping("/delete/{id}")
+    public Result delete(@PathVariable Integer id) { // @PathVariable 接受路径参数
+        adminService.deleteById(id);
+        return Result.success();
+    }
+    @PutMapping("/update")
+    public Result update(@RequestBody Admin admin) {
+        adminService.update(admin);
         return Result.success();
     }
 
