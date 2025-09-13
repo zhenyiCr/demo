@@ -6,10 +6,7 @@ import com.example.entity.Admin;
 import com.example.service.AdminService;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +17,12 @@ public class AdminController {
 
     @Resource
     AdminService adminService;
+
+    @PostMapping("/add")
+    public Result add(@RequestBody Admin admin) { // @RequestBody 接受前端传来的json数据
+        adminService.add(admin);
+        return Result.success();
+    }
 
     @GetMapping("/selectAll")
     public Result slectAll() {

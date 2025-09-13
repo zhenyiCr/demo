@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 //全局异常处理
-@ControllerAdvice("com.example")
+@ControllerAdvice("com.example.*")
 public class GlobalExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(WebController.class);
 
