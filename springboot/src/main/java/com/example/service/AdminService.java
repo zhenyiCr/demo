@@ -1,5 +1,6 @@
 package com.example.service;
 
+import cn.hutool.core.util.StrUtil;
 import com.example.entity.Admin;
 import com.example.exception.CustomerException;
 import com.example.mapper.AdminMapper;
@@ -16,16 +17,19 @@ public class AdminService {
     @Resource
     AdminMapper adminMapper;
 
-    public String adminName(String name) {
-        if (name.equals("admin")) return name;
-        else {
-            throw new CustomerException("用户名错误");
-        }
-
-    }
-
     public List<Admin> selectAll() {
         return adminMapper.selectAll(null);
+    }
+    public void add(Admin admin) {
+        // 判断用户名是否已存在
+        Admin dbAdmin = adminMapper.selectByUsername(admin.getUsername());
+        if (dbAdmin != null) {
+            throw new CustomerException("用户名已存在");
+        }
+        if (StrUtil.isBlank(admin.getPassword())) {
+            admin.setPassword("admin");
+        }
+        adminMapper.insert(admin);
     }
 
 
@@ -35,4 +39,6 @@ public class AdminService {
         List<Admin> admins = adminMapper.selectAll(admin);
         return PageInfo.of(admins);
     }
+
+
 }

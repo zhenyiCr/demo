@@ -2,15 +2,16 @@
   <div>
     <div class="card">
       <div>
-        <el-input clearable @clear="getData" style="margin-right: 10px;width: 260px;margin-bottom: 7px;margin-top: 8px" placeholder="请输入内容"
+        <el-input clearable @clear="getData" style="margin-right: 10px;width: 260px;margin-bottom: 7px;margin-top: 8px"
+                  placeholder="请输入内容"
                   :prefix-icon="Search"
                   v-model="data.name"></el-input>
         <el-button type="primary" @click="getData">查询</el-button>
         <el-button @click="reset">重置</el-button>
       </div>
       <div style="margin-bottom: 5px;margin-top: 5px">
+        <el-button @click="headleAdd" type="primary">新增</el-button>
         <el-button type="danger">删除</el-button>
-        <el-button type="primary">新增</el-button>
         <el-button type="success">导出</el-button>
       </div>
     </div>
@@ -38,12 +39,33 @@
           @size-change="getData"
       />
     </div>
+    <el-dialog title="管理员信息" v-model="data.formVisible" width="500" destroy-on-close>
+      <el-form ref="formRef" :model="data.form" :rules="data.rules" label-width="80px" style="padding:20px 30px 20px 0">
+        <el-form-item prop="username" label="账号">
+          <el-input v-model="data.form.username" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item prop="name" label="名称">
+          <el-input v-model="data.form.name" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item prop="phone" label="电话">
+          <el-input v-model="data.form.phone" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item prop="email" label="邮箱">
+          <el-input v-model="data.form.email" autocomplete="off"/>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="data.formVisible = false">取 消</el-button>
+          <el-button type="primary" @click="add">提 交</el-button>
+        </div>
+      </template>
+    </el-dialog>
   </div>
-
 </template>
 
 <script setup>
-import {reactive} from "vue"
+import {reactive, ref} from "vue"
 import {Search} from "@element-plus/icons-vue";
 
 import request from "@/utils/request.js";
@@ -55,24 +77,39 @@ const data = reactive({
       pageNum: 1,
       pageSize: 10,
       total: 0,
-      tableData: []
+      tableData: [],
+      formVisible: false,
+      form: {},
+      rules: {
+        username: [
+           {required: true, message: '请输入账号', trigger: 'blur'},
+        ],
+        name: [
+          {required: true, message: '请输入名称', trigger: 'blur'},
+        ],
+        phone: []
+        , email: [
+          {required: true, message: '请输入邮箱', trigger: 'blur'},
+        ]
+      }
     }
 )
 
+const formRef = ref()
+
 const getData = () => {
-  request.get('/admin/selectPage',{
-    params: {
-      pageNum: data.pageNum,
-      pageSize: data.pageSize,
-      name: data.name
-    }
+  request.get('/admin/selectPage', {
+        params: {
+          pageNum: data.pageNum,
+          pageSize: data.pageSize,
+          name: data.name
+        }
       }
   ).then(res => {
-    if (res.code === '200')
-    {
+    if (res.code === '200') {
       data.tableData = res.data.list
       data.total = res.data.total
-    }else {
+    } else {
       ElMessage.error(res.msg)
     }
   })
@@ -82,5 +119,26 @@ const reset = () => {
   data.name = null
   getData()
 }
+const headleAdd = () => {
+  data.formVisible = true
+  data.form = {}
+}
+const add = () => {
+  // formRef 表单的验证
+  formRef.value.validate((valid) => {
+    if (valid) { // 表单验证成功
+      request.post('/admin/add', data.form).then(res => {
+        if (res.code === '200') {
+          ElMessage.success("新增成功")
+          data.formVisible = false
+          getData()
+        } else {
+          ElMessage.error(res.msg)
+        }
+      })
+    }
+  })
+}
+
 
 </script>
