@@ -8,6 +8,18 @@ public class Admin {
     private String phone;
     private String email;
 
+    //非数据库属性
+    private String ids;
+    private String[] idArr;
+
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIdArr(String[] idArr) {
+        this.idArr = idArr;
+    }
+
     public Integer getId() {
         return id;
     }

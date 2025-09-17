@@ -23,8 +23,8 @@ public class AdminService {
         else throw new CustomerException("用户名不存在");
     }
 
-    public List<Admin> selectAll() {
-        return adminMapper.selectAll(null);
+    public List<Admin> selectAll(Admin admin) {
+        return adminMapper.selectAll(admin);
     }
 
     public void add(Admin admin) {
@@ -59,9 +59,13 @@ public class AdminService {
 
     }
 
-
-
     public void deleteById(Integer id) {
         adminMapper.deleteById(id);
+    }
+
+    public void deleteBatch(List<Admin> list) {
+        for (Admin admin : list) {
+            this.deleteById(admin.getId());
+        }
     }
 }
