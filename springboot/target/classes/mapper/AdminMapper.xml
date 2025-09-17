@@ -8,7 +8,14 @@
     <select id="selectAll" resultType="com.example.entity.Admin">
         select * from `admin`
         <where>
-            <if test="name != null">name like '%${name}%'</if>
+            <if test="name != null and name !='' ">name like '%${name}%'</if>
+            <if test="username != null and username !='' ">and username like '%${username}%'</if>
+            <if test="ids != null and ids != ''">
+                and id in
+                <foreach item="id" collection="idArr" separator="," open="(" close=")">
+                    #{id}
+                </foreach>
+            </if>
         </where>
         order by id desc
     </select>
