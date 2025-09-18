@@ -15,6 +15,9 @@ public class Admin {
     public String getIds() {
         return ids;
     }
+    public void setIds(String ids) {
+        this.ids = ids;
+    }
 
     public void setIdArr(String[] idArr) {
         this.idArr = idArr;

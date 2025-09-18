@@ -43,7 +43,7 @@
           v-model:current-page="data.pageNum"
           v-model:page-size="data.pageSize"
           layout="total, sizes, prev, pager, next, jumper"
-          :page-sizes="[5, 10, 15]"
+          :page-sizes="[5, 10]"
           :total="data.total"
           @current-change="getData"
           @size-change="getData"
@@ -104,7 +104,7 @@ const data = reactive({
         ]
       },
       rows: [],
-      ids: []
+      ids: [],
     }
 )
 
@@ -202,11 +202,13 @@ const deleteBatch = () => {
     return
   }
   ElMessageBox.confirm(' 你确定删除信息吗', 'Warning', {type: 'warning'}).then(() => {
-    request.post('/admin/deleteBatch', {ids: data.rows}).then(res => {
+    request.delete('/admin/deleteBatch', {data: data.rows}).then(res => {
       if (res.code === '200') {
         ElMessage.success("删除成功")
         getData()
-      } else {}
+      } else {
+        ElMessage.error(res.msg)
+      }
     })
   })
 }
