@@ -68,4 +68,15 @@ public class AdminService {
             this.deleteById(admin.getId());
         }
     }
+
+    public Admin login(Admin admin) {
+        Admin dbAdmin = adminMapper.selectByUsername(admin.getUsername());
+        if (dbAdmin == null) {
+            throw new CustomerException("用户名不存在");
+        }
+        if (!dbAdmin.getPassword().equals(admin.getPassword())) {
+            throw new CustomerException("账号或密码错误");
+        }
+        return dbAdmin;
+    }
 }

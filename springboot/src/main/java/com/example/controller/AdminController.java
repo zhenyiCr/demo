@@ -2,6 +2,7 @@ package com.example.controller;
 
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.example.common.Result;
@@ -12,7 +13,9 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -100,5 +103,24 @@ public class AdminController {
         writer.flush(os);
         writer.close();
         os.close();
+    }
+
+    // Excel导入
+    @PostMapping("/import")
+    public Result importData(MultipartFile file) throws Exception {
+        // 1. 拿到输入流 构建 reader
+        InputStream inputStream = file.getInputStream();
+        ExcelReader reader = ExcelUtil.getReader(inputStream);
+        // 2. 通过Reader读取 excel 里面的数据
+        reader.addHeaderAlias("账号", "username");
+        reader.addHeaderAlias("用户", "name");
+        reader.addHeaderAlias("手机", "phone");
+        reader.addHeaderAlias("邮箱", "email");
+        List<Admin> list = reader.readAll(Admin.class);
+        // 3. 批量插入数据库
+        for (Admin admin : list) {
+            adminService.add(admin);
+        }
+        return Result.success();
     }
 }

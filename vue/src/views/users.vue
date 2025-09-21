@@ -13,10 +13,20 @@
         <el-button type="primary" @click="getData">查询</el-button>
         <el-button @click="reset">重置</el-button>
       </div>
+
       <div style="margin-bottom: 5px;margin-top: 5px">
         <el-button @click="headleAdd" type="primary">新增</el-button>
         <el-button @click="deleteBatch" type="danger">批量删除</el-button>
         <el-button @click="exportDate" type="success">批量导出</el-button>
+        <el-upload
+        style="display: inline-block;margin-left: 10px"
+        action="http://localhost:8080/admin/import"
+        :show-file-list="false"
+        :on-success="handleImportSuccess"
+        >
+          <el-button type="primary">导入</el-button>
+        </el-upload>
+
       </div>
     </div>
 
@@ -77,7 +87,6 @@
 <script setup>
 import {reactive, ref} from "vue"
 import {Search} from "@element-plus/icons-vue";
-
 import request from "@/utils/request.js";
 import {ElMessage, ElMessageBox} from "element-plus";
 
@@ -219,5 +228,14 @@ const exportDate = () => {
       +`&name=${data.name === null ? '' : data.name}`
       +`&ids=${idsStr}`
   window.open(url)
+}
+
+const handleImportSuccess = (res) => {
+  if (res.code === '200') {
+    ElMessage.success("导入成功")
+    getData()
+  } else {
+    ElMessage.error(res.msg)
+  }
 }
 </script>
