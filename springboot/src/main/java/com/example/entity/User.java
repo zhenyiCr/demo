@@ -1,6 +1,6 @@
 package com.example.entity;
 
-public class Admin extends Account{
+public class User extends Account{
     private Integer id;
     private String username;
     private String password;

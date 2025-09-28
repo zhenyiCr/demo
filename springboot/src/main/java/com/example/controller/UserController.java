@@ -6,8 +6,8 @@ import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.example.common.Result;
-import com.example.entity.Admin;
-import com.example.service.AdminService;
+import com.example.entity.User;
+import com.example.service.UserService;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;
@@ -22,43 +22,43 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/user")
+public class UserController {
 
     @Resource
-    AdminService adminService;
+    UserService userService;
 
-    @GetMapping("/admin")
-    public Result admin(String username) {
-        String admin = adminService.Admin(username);
-        return Result.success(admin);
+    @GetMapping("/user")
+    public Result user(String username) {
+        String user = userService.User(username);
+        return Result.success(user);
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Admin admin) { // @RequestBody 接受前端传来的json数据
-        adminService.add(admin);
+    public Result add(@RequestBody User user) { // @RequestBody 接受前端传来的json数据
+        userService.add(user);
         return Result.success();
     }
     @DeleteMapping("/delete/{id}")
     public Result delete(@PathVariable Integer id) { // @PathVariable 接受路径参数
-        adminService.deleteById(id);
+        userService.deleteById(id);
         return Result.success();
     }
     @DeleteMapping("/deleteBatch")
-    public Result deleteBatch(@RequestBody List<Admin> list) {
-        adminService.deleteBatch(list);
+    public Result deleteBatch(@RequestBody List<User> list) {
+        userService.deleteBatch(list);
         return Result.success();
     }
     @PutMapping("/update")
-    public Result update(@RequestBody Admin admin) {
-        adminService.update(admin);
+    public Result update(@RequestBody User user) {
+        userService.update(user);
         return Result.success();
     }
 
     @GetMapping("/selectAll")
-    public Result slectAll(Admin admin) {
-        List<Admin> adminList = adminService.selectAll(admin);
-        return Result.success(adminList);
+    public Result slectAll(User user) {
+        List<User> userList = userService.selectAll(user);
+        return Result.success(userList);
     }
 
     // 分页查询
@@ -67,21 +67,21 @@ public class AdminController {
     @GetMapping("/selectPage")
     public Result slectPage(@RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "10") Integer pageSize,
-                            Admin admin) {
-        PageInfo<Admin> pageInfo = adminService.selectPage(pageNum,pageSize,admin);
+                            User user) {
+        PageInfo<User> pageInfo = userService.selectPage(pageNum,pageSize,user);
         return Result.success(pageInfo);
     }
 
     // excel 导出
     @GetMapping("/export")
-    public void exportDate(Admin admin,HttpServletResponse response) throws Exception {
-        String ids =admin.getIds();
+    public void exportDate(User user,HttpServletResponse response) throws Exception {
+        String ids =user.getIds();
         if  (StrUtil.isNotBlank(ids)) {
             String[] split = ids.split(",");
-            admin.setIdArr(split);
+            user.setIdArr(split);
         }
         // 1. 拿到所有数据
-        List<Admin> list = adminService.selectAll(admin);
+        List<User> list = userService.selectAll(user);
         // 2. 构建writer对象
         ExcelWriter writer = ExcelUtil.getWriter(true);
         // 3. 设置中文表头
@@ -116,10 +116,10 @@ public class AdminController {
         reader.addHeaderAlias("用户", "name");
         reader.addHeaderAlias("手机", "phone");
         reader.addHeaderAlias("邮箱", "email");
-        List<Admin> list = reader.readAll(Admin.class);
+        List<User> list = reader.readAll(User.class);
         // 3. 批量插入数据库
-        for (Admin admin : list) {
-            adminService.add(admin);
+        for (User user : list) {
+            userService.add(user);
         }
         return Result.success();
     }

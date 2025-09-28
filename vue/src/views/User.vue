@@ -13,10 +13,20 @@
         <el-button type="primary" @click="getData">查询</el-button>
         <el-button @click="reset">重置</el-button>
       </div>
+
       <div style="margin-bottom: 5px;margin-top: 5px">
         <el-button @click="headleAdd" type="primary">新增</el-button>
         <el-button @click="deleteBatch" type="danger">批量删除</el-button>
         <el-button @click="exportDate" type="success">批量导出</el-button>
+        <el-upload
+        style="display: inline-block;margin-left: 10px"
+        action="http://localhost:8080/admin/import"
+        :show-file-list="false"
+        :on-success="handleImportSuccess"
+        >
+          <el-button type="primary">导入</el-button>
+        </el-upload>
+
       </div>
     </div>
 
@@ -77,7 +87,6 @@
 <script setup>
 import {reactive, ref} from "vue"
 import {Search} from "@element-plus/icons-vue";
-
 import request from "@/utils/request.js";
 import {ElMessage, ElMessageBox} from "element-plus";
 
@@ -111,7 +120,7 @@ const data = reactive({
 const formRef = ref()
 
 const getData = () => {
-  request.get('/admin/selectPage', {
+  request.get('/user/selectPage', {
         params: {
           pageNum: data.pageNum,
           pageSize: data.pageSize,
@@ -142,7 +151,7 @@ const add = () => {
   // formRef 表单的验证
   formRef.value.validate((valid) => {
     if (valid) { // 表单验证成功
-      request.post('/admin/add', data.form).then(res => {
+      request.post('/user/add', data.form).then(res => {
         if (res.code === '200') {
           ElMessage.success("新增成功")
           data.formVisible = false
@@ -162,7 +171,7 @@ const edit = () => {
   // formRef 表单的验证
   formRef.value.validate((valid) => {
     if (valid) { // 表单验证成功
-      request.put('/admin/update', data.form).then(res => {
+      request.put('/user/update', data.form).then(res => {
         if (res.code === '200') {
           ElMessage.success("修改成功")
           data.formVisible = false
@@ -180,7 +189,7 @@ const save = () => {
 
 const del = (id) => {
   ElMessageBox.confirm(' 你确定删除信息吗', 'Warning', {type: 'warning'}).then(() => {
-    request.delete('/admin/delete/' + id).then(res => {
+    request.delete('/user/delete/' + id).then(res => {
       if (res.code === '200') {
         ElMessage.success("删除成功")
         getData()
@@ -202,7 +211,7 @@ const deleteBatch = () => {
     return
   }
   ElMessageBox.confirm(' 你确定删除信息吗', 'Warning', {type: 'warning'}).then(() => {
-    request.delete('/admin/deleteBatch', {data: data.rows}).then(res => {
+    request.delete('/user/deleteBatch', {data: data.rows}).then(res => {
       if (res.code === '200') {
         ElMessage.success("删除成功")
         getData()
@@ -215,9 +224,18 @@ const deleteBatch = () => {
 
 const exportDate = () => {
   let idsStr = data.ids.join(",") // 把数组转换成 字符串  [1,2,3] -> "1,2,3"
-  let url = `http://localhost:8080/admin/export?username=${data.username === null ? '' : data.username}`
+  let url = `http://localhost:8080/user/export?username=${data.username === null ? '' : data.username}`
       +`&name=${data.name === null ? '' : data.name}`
       +`&ids=${idsStr}`
   window.open(url)
+}
+
+const handleImportSuccess = (res) => {
+  if (res.code === '200') {
+    ElMessage.success("导入成功")
+    getData()
+  } else {
+    ElMessage.error(res.msg)
+  }
 }
 </script>
