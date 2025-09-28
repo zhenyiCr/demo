@@ -2,11 +2,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mapper.AdminMapper">
+<mapper namespace="com.example.mapper.UserMapper">
 
 
-    <select id="selectAll" resultType="com.example.entity.Admin">
-        select * from `admin`
+    <select id="selectAll" resultType="com.example.entity.User">
+        select * from `user`
         <where>
             <if test="name != null and name !='' ">name like '%${name}%'</if>
             <if test="username != null and username !='' ">and username like '%${username}%'</if>
@@ -21,12 +21,12 @@
     </select>
 
     <insert id="insert">
-        insert into `admin`(username,password,name,phone,email,role)
+        insert into `user`(username,password,name,phone,email,role)
         values(#{username},#{password},#{name},#{phone},#{email},#{role})
     </insert>
 
     <update id="update">
-        update `admin` set username=#{username},password=#{password},name=#{name},phone=#{phone},email=#{email} where
+        update `user` set username=#{username},password=#{password},name=#{name},phone=#{phone},email=#{email} where
         id=#{id}
     </update>
 

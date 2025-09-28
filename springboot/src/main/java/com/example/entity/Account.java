@@ -1,6 +1,6 @@
 package com.example.entity;
 
-public class Admin extends Account{
+public class Account {
     private Integer id;
     private String username;
     private String password;
@@ -8,21 +8,6 @@ public class Admin extends Account{
     private String phone;
     private String email;
     private String role;
-
-    //非数据库属性
-    private String ids;
-    private String[] idArr;
-
-    public String getIds() {
-        return ids;
-    }
-    public void setIds(String ids) {
-        this.ids = ids;
-    }
-
-    public void setIdArr(String[] idArr) {
-        this.idArr = idArr;
-    }
 
     public Integer getId() {
         return id;

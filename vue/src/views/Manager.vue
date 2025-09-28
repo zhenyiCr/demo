@@ -27,37 +27,17 @@
                   src="https://picsum.photos/id/1005/40/40"
                   alt="管理员头像"
               >
-              <span class="username">管理员</span>
+              <span class="username">{{data.user?.name}}</span>
               <el-icon class="arrow-icon">
                 <ChevronDown/>
               </el-icon>
             </div>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>
-                  <el-icon>
-                    <User/>
-                  </el-icon>
-                  <span>个人信息</span>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <el-icon>
-                    <Lock/>
-                  </el-icon>
-                  <span>修改密码</span>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <el-icon>
-                    <Settings/>
-                  </el-icon>
-                  <span>系统设置</span>
-                </el-dropdown-item>
-                <el-dropdown-item divided>
-                  <el-icon>
-                    <Logout/>
-                  </el-icon>
-                  <span>退出登录</span>
-                </el-dropdown-item>
+                <el-dropdown-item icon="User">个人信息</el-dropdown-item>
+                <el-dropdown-item icon="Lock">修改密码</el-dropdown-item>
+                <el-dropdown-item icon="Setting">系统设置</el-dropdown-item>
+                <el-dropdown-item @click="Logout" icon="Remove" divided>退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -114,7 +94,8 @@
               </el-icon>
               <span>系统设置</span>
             </template>
-            <el-menu-item index="/manager/users">用户管理</el-menu-item>
+            <el-menu-item index="/manager/admin">管理员信息</el-menu-item>
+            <el-menu-item index="/manager/user">普通用户信息</el-menu-item>
             <el-menu-item index="/manager/system/roles">角色权限</el-menu-item>
             <el-menu-item index="/manager/system/logs">操作日志</el-menu-item>
           </el-sub-menu>
@@ -144,7 +125,20 @@
 </template>
 
 <script setup>
+import {reactive} from 'vue'
 import router from "../router/index.js";
+const data = reactive({
+    user : JSON.parse(localStorage.getItem('user'))
+})
+if (!data.user?.id) {
+    router.push('/login')
+}
+
+
+const Logout = () => {
+  localStorage.removeItem('user')
+  location.href = '/login'
+}
 </script>
 
 <style scoped>
