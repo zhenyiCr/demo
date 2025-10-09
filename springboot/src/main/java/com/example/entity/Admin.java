@@ -12,6 +12,7 @@ public class Admin extends Account{
     //非数据库属性
     private String ids;
     private String[] idArr;
+    private String token;
 
     public String getIds() {
         return ids;
@@ -77,5 +78,13 @@ public class Admin extends Account{
     }
     public void setRole(String role) {
         this.role = role;
+    }
+    @Override
+    public String getToken() {
+        return token;
+    }
+    @Override
+    public void setToken(String token) {
+        this.token = token;
     }
 }

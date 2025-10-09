@@ -130,10 +130,6 @@ import router from "../router/index.js";
 const data = reactive({
     user : JSON.parse(localStorage.getItem('user'))
 })
-if (!data.user?.id) {
-    router.push('/login')
-}
-
 
 const Logout = () => {
   localStorage.removeItem('user')
