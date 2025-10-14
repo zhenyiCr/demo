@@ -64,7 +64,7 @@ public class JWTInterceptor implements HandlerInterceptor {
             JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(account.getPassword())).build();
             jwtVerifier.verify(token);
         } catch (Exception e) {
-            throw new CustomerException("401", "您无权操作");
+            throw new CustomerException("401", "token失效,请重新登录");
         }
         return true;
     }

@@ -14,9 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.yaml.snakeyaml.constructor.Construct;
-
-import java.net.http.HttpClient;
 import java.util.Date;
 
 @Component

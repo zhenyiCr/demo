@@ -21,12 +21,13 @@
     </select>
 
     <insert id="insert">
-        insert into `admin`(username,password,name,phone,email,role)
-        values(#{username},#{password},#{name},#{phone},#{email},#{role})
+        insert into `admin`(username,password,name,phone,email,role,avatar)
+        values(#{username},#{password},#{name},#{phone},#{email},#{role},#{avatar})
     </insert>
 
     <update id="update">
-        update `admin` set username=#{username},password=#{password},name=#{name},phone=#{phone},email=#{email} where
+        update `admin` set username=#{username},password=#{password},name=#{name},
+        phone=#{phone},email=#{email},role=#{role},avatar= #{avatar} where
         id=#{id}
     </update>
 

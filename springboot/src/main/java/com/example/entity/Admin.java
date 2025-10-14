@@ -8,11 +8,20 @@ public class Admin extends Account{
     private String phone;
     private String email;
     private String role;
+    private String avatar;
 
     //非数据库属性
     private String ids;
     private String[] idArr;
     private String token;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getIds() {
         return ids;
