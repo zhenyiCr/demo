@@ -22,11 +22,8 @@
           </el-button>
           <el-dropdown placement="bottom-end">
             <div class="user-info">
-              <img
-                  class="avatar"
-                  src="https://picsum.photos/id/1005/40/40"
-                  alt="管理员头像"
-              >
+              <img v-if="data.user?.avatar" class="avatar" :src=" data.user?.avatar " />
+              <el-avatar v-else icon="User" class="avatar" />
               <span class="username">{{data.user?.name}}</span>
               <el-icon class="arrow-icon">
                 <ChevronDown/>
@@ -34,7 +31,7 @@
             </div>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item icon="User">个人信息</el-dropdown-item>
+                <el-dropdown-item icon="User" @click="router.push('/manager/person')">个人信息</el-dropdown-item>
                 <el-dropdown-item icon="Lock">修改密码</el-dropdown-item>
                 <el-dropdown-item icon="Setting">系统设置</el-dropdown-item>
                 <el-dropdown-item @click="Logout" icon="Remove" divided>退出登录</el-dropdown-item>
@@ -127,6 +124,7 @@
 <script setup>
 import {reactive} from 'vue'
 import router from "../router/index.js";
+
 const data = reactive({
     user : JSON.parse(localStorage.getItem('user'))
 })
