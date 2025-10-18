@@ -91,14 +91,16 @@ public class AdminService {
         return adminMapper.selectById(id);
     }
 
-    public Admin updatePassword(ChangePasswordDTO changePasswordDTO,Account account) {
-        Admin dbAdmin = adminMapper.selectById(account.getId());
-        if (!dbAdmin.getPassword().equals(account.getPassword())) {
+    public Admin updatePassword(ChangePasswordDTO changePasswordDTO, Account currentAccount) {
+        Admin dbAdmin = adminMapper.selectById(currentAccount.getId());
+        // 正确：用用户输入的oldPassword对比数据库密码
+        if (!dbAdmin.getPassword().equals(changePasswordDTO.getOldPassword())) {
             throw new CustomerException("原密码错误");
         }
         dbAdmin.setPassword(changePasswordDTO.getNewPassword());
         adminMapper.update(dbAdmin);
-        dbAdmin.setToken(TokenUtils.createToken(dbAdmin.getId() + "-" +"ADMIN", dbAdmin.getPassword()));
+        // 用新密码重新生成token（关键：密码变更后旧token失效）
+        dbAdmin.setToken(TokenUtils.createToken(dbAdmin.getId() + "-ADMIN", dbAdmin.getPassword()));
         return dbAdmin;
     }
 }
