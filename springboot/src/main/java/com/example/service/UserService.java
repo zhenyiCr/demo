@@ -2,6 +2,7 @@ package com.example.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.example.entity.Account;
+import com.example.entity.Admin;
 import com.example.entity.ChangePasswordDTO;
 import com.example.entity.User;
 import com.example.exception.CustomerException;
@@ -97,15 +98,16 @@ public class UserService {
         return userMapper.selectById(id);
     }
 
-    public User updatePassword(ChangePasswordDTO changePasswordDTO, Account account) {
-        User dbUser = userMapper.selectById(account.getId());
+    public User updatePassword(ChangePasswordDTO changePasswordDTO, Account currentAccount) {
+        User dbUser = userMapper.selectById(currentAccount.getId());
+        // 正确：用用户输入的oldPassword对比数据库密码
         if (!dbUser.getPassword().equals(changePasswordDTO.getOldPassword())) {
             throw new CustomerException("原密码错误");
         }
         dbUser.setPassword(changePasswordDTO.getNewPassword());
         userMapper.update(dbUser);
-        account.setPassword(changePasswordDTO.getNewPassword());
-        account.setToken(TokenUtils.createToken(account.getId() + "-" +"USER", account.getPassword()));
+        // 用新密码重新生成token（关键：密码变更后旧token失效）
+        dbUser.setToken(TokenUtils.createToken(dbUser.getId() + "-ADMIN", dbUser.getPassword()));
         return dbUser;
     }
 }

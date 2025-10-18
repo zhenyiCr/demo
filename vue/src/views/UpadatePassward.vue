@@ -66,20 +66,16 @@ const data = reactive({
 const updatePassword = () => {
     formRef.value.validate((valid) => {
         if (valid) {
-            const params = {
-                changePasswordDTO :data.form,
-                account :data.user
-            };
-            request.post('/updatePassword', params).then(res => {
-
-                if (res.code === 200 ) {
-                    ElMessage.success("修改成功")
+            // 仅传递密码相关数据，用户身份由请求头的token确定
+            request.post('/updatePassword', data.form).then(res => {
+                if (res.code === '200') {
+                    ElMessage.success("修改成功");
                     setTimeout(() => {
-                        localStorage.removeItem("user")
-                        router.push("/login")
-                    }, 500)
+                        localStorage.removeItem("user");
+                        router.push("/login");
+                    }, 500);
                 } else {
-                    ElMessage.error(res.msg)
+                    ElMessage.error(res.msg);
                 }
             })
         }
