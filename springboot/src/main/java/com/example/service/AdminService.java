@@ -3,6 +3,7 @@ package com.example.service;
 import cn.hutool.core.util.StrUtil;
 import com.example.entity.Account;
 import com.example.entity.Admin;
+import com.example.entity.ChangePasswordDTO;
 import com.example.exception.CustomerException;
 import com.example.mapper.AdminMapper;
 import com.example.utils.TokenUtils;
@@ -62,7 +63,7 @@ public class AdminService {
 
     }
 
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         adminMapper.deleteById(id);
     }
 
@@ -88,5 +89,16 @@ public class AdminService {
 
     public Admin selectById(String id) {
         return adminMapper.selectById(id);
+    }
+
+    public Admin updatePassword(ChangePasswordDTO changePasswordDTO,Account account) {
+        Admin dbAdmin = adminMapper.selectById(account.getId());
+        if (!dbAdmin.getPassword().equals(account.getPassword())) {
+            throw new CustomerException("原密码错误");
+        }
+        dbAdmin.setPassword(changePasswordDTO.getNewPassword());
+        adminMapper.update(dbAdmin);
+        dbAdmin.setToken(TokenUtils.createToken(dbAdmin.getId() + "-" +"ADMIN", dbAdmin.getPassword()));
+        return dbAdmin;
     }
 }

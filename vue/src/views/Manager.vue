@@ -32,7 +32,7 @@
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item icon="User" @click="router.push('/manager/person')">个人信息</el-dropdown-item>
-                <el-dropdown-item icon="Lock">修改密码</el-dropdown-item>
+                <el-dropdown-item icon="Lock" @click="router.push('/manager/upadatePassward')">修改密码</el-dropdown-item>
                 <el-dropdown-item icon="Setting">系统设置</el-dropdown-item>
                 <el-dropdown-item @click="Logout" icon="Remove" divided>退出登录</el-dropdown-item>
               </el-dropdown-menu>
@@ -111,7 +111,7 @@
 
         <!-- 主内容区域 -->
         <div class="main-content">
-          <RouterView/>
+          <RouterView @updateUser="updateUser" />
         </div>
       </main>
       <!--  数据区域结束    -->
@@ -132,6 +132,9 @@ const data = reactive({
 const Logout = () => {
   localStorage.removeItem('user')
   location.href = '/login'
+}
+const updateUser = () => {
+    data.user= JSON.parse(localStorage.getItem('user')|| '{}')
 }
 </script>
 

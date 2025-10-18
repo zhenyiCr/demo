@@ -23,7 +23,7 @@ public interface AdminMapper {
 
 
     @Delete("delete from `admin` where id = #{id}")
-    void deleteById(Integer id);
+    void deleteById(String id);
 
     @Select("select * from `admin` where id = #{id}")
     Admin selectById(String id);
