@@ -40,7 +40,7 @@ public class AdminController {
         return Result.success();
     }
     @DeleteMapping("/delete/{id}")
-    public Result delete(@PathVariable Integer id) { // @PathVariable 接受路径参数
+    public Result delete(@PathVariable String id) { // @PathVariable 接受路径参数
         adminService.deleteById(id);
         return Result.success();
     }

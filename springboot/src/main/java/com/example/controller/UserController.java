@@ -40,7 +40,7 @@ public class UserController {
         return Result.success();
     }
     @DeleteMapping("/delete/{id}")
-    public Result delete(@PathVariable Integer id) { // @PathVariable 接受路径参数
+    public Result delete(@PathVariable String id) { // @PathVariable 接受路径参数
         userService.deleteById(id);
         return Result.success();
     }
@@ -65,7 +65,7 @@ public class UserController {
     // pageNum 当前页数
     // pageSize 每页显示的条数
     @GetMapping("/selectPage")
-    public Result slectPage(@RequestParam(defaultValue = "1") Integer pageNum,
+    public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
                             @RequestParam(defaultValue = "10") Integer pageSize,
                             User user) {
         PageInfo<User> pageInfo = userService.selectPage(pageNum,pageSize,user);
