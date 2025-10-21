@@ -1,8 +1,6 @@
 package com.example.exception;
 
 import com.example.common.Result;
-import com.example.controller.AdminController;
-import com.example.controller.WebController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
