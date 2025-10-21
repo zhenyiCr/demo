@@ -40,22 +40,22 @@
                 <el-table-column label="头像" width="120px">
                     <template #default="scope">
                         <el-image
-                            v-if="scope.row.avatar"
-                            :src="scope.row.avatar"
-                            :preview-src-list="[scope.row.avatar]"
-                            :preview-teleported="true"
-                            fit="cover"
-                            style="width: 40px; height: 40px; border-radius: 50%; display: block"
+                                v-if="scope.row.avatar"
+                                :src="scope.row.avatar"
+                                :preview-src-list="[scope.row.avatar]"
+                                :preview-teleported="true"
+                                fit="cover"
+                                style="width: 40px; height: 40px; border-radius: 50%; display: block"
                         />
                         <!-- 没有头像时显示默认图标或图片 -->
-                        <el-avatar v-else icon="User" style="width: 40px; height: 40px;" />
+                        <el-avatar v-else icon="User" style="width: 40px; height: 40px;"/>
                     </template>
                 </el-table-column>
-<!--                <el-table-column label="头像">-->
-<!--                    <template #default="scope">-->
-<!--                        <el-image v-if="scope.row.avatar" :src="scope.row.avatar" :preview-src-list="[scope.row.avatar]" style="width: 40px;height: 40px ;border-radius: 50%;display: block" />-->
-<!--                    </template>-->
-<!--                </el-table-column>-->
+                <!--                <el-table-column label="头像">-->
+                <!--                    <template #default="scope">-->
+                <!--                        <el-image v-if="scope.row.avatar" :src="scope.row.avatar" :preview-src-list="[scope.row.avatar]" style="width: 40px;height: 40px ;border-radius: 50%;display: block" />-->
+                <!--                    </template>-->
+                <!--                </el-table-column>-->
                 <el-table-column prop="username" label="账户"/>
                 <el-table-column prop="name" label="姓名"/>
                 <el-table-column prop="phone" label="电话号"/>

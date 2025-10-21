@@ -8,9 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
 // 文件上传下载相关的接口
 @RestController
 @RequestMapping("/file")
