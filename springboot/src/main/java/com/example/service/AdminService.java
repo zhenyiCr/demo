@@ -98,9 +98,9 @@ public class AdminService {
             throw new CustomerException("原密码错误");
         }
         dbAdmin.setPassword(changePasswordDTO.getNewPassword());
-        adminMapper.update(dbAdmin);
         // 用新密码重新生成token（关键：密码变更后旧token失效）
         dbAdmin.setToken(TokenUtils.createToken(dbAdmin.getId() + "-ADMIN", dbAdmin.getPassword()));
+        adminMapper.update(dbAdmin);
         return dbAdmin;
     }
 }

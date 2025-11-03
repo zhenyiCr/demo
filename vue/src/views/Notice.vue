@@ -17,7 +17,7 @@
             </div>
         </div>
         <div>
-            <el-table :data="data.tableData" style="width: 100%" @selection-change="handleSelectionChange"
+            <el-table :data="data.tableData" style="width: 100%"
                       :header-cell-style="{fontWeight:'bold',background:'#f5f5f5'}">
                 <el-table-column prop="title" label="标题"/>
                 <el-table-column prop="content" label="内容"/>

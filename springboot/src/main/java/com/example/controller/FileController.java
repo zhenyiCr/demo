@@ -1,12 +1,17 @@
 package com.example.controller;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.Dict;
 import com.example.common.Result;
 import com.example.exception.CustomerException;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.HashMap;
+import java.util.Map;
 
 // 文件上传下载相关的接口
 @RestController
@@ -46,5 +51,25 @@ public class FileController {
         os.write(bytes);
         os.flush();
         os.close();
+    }
+    @PostMapping("/wang/upload")
+    public Map<String,Object> wangupload(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        String flag = System.currentTimeMillis() + "";
+        try {
+            String filePath = System.getProperty("user.dir") + "/files/";
+            // 文件命名 时间戳-文件名
+            FileUtil.writeBytes(file.getBytes(),filePath + flag + "-" + fileName);
+            System.out.println("文件上传成功");
+            Thread.sleep(1l);
+        } catch (Exception e) {
+            System.out.println("文件上传失败");
+        }
+        String http = "http://localhost:8080/file/download/" + flag + "-" + fileName;
+        Map<String,Object> resMap = new HashMap<>();
+        // 图片上传成功后，返回图片的url和文件名
+        resMap.put("errno",0);
+        resMap.put("data", CollUtil.newArrayList(Dict.create().set("url",http)));
+        return resMap;
     }
 }

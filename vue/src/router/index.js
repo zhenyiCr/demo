@@ -13,6 +13,8 @@ const router = createRouter({
                 {path: 'person',meta: {name: '个人中心'}, component:() => import('../views/Person.vue')},
                 {path: 'upadatePassward',meta: {name: '修改密码'}, component:() => import('../views/UpadatePassward.vue')},
                 {path: 'notice',meta: {name: '系统公告'}, component:() => import('../views/Notice.vue')},
+                {path: 'introduction',meta: {name: '文本'}, component:() => import('../views/Introduction.vue')},
+                {path: 'category',meta: {name: '分类'}, component:() => import('../views/Category.vue')},
             ]
         },
         {path: '/login', component: import('../views/Login.vue')},

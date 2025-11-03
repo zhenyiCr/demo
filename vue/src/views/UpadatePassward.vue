@@ -107,17 +107,17 @@ const updatePassword = () => {
     padding: 0 20px;
 }
 
-.el-form-item {
+:deep(.el-form .el-form-item) {
     margin-bottom: 20px;
 }
 
-.el-input__wrapper {
+:deep(.el-form .el-form-item .el-input .el-input__wrapper) {
     border-radius: 4px;
     border-color: #ddd;
     transition: all 0.3s ease;
 }
 
-.el-input__wrapper:focus {
+:deep(.el-form .el-form-item .el-input .el-input__wrapper:focus) {
     border-color: #409eff;
     box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
 }

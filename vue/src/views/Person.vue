@@ -54,7 +54,7 @@
 <script setup>
 import {reactive, onMounted, ref} from "vue";
 import {ElMessage} from "element-plus";
-import request from "@/utils/request.js";
+import request from "../../../../demo/vue/src/utils/request.js";
 const formRef = ref()
 
 const data = reactive({
@@ -164,7 +164,7 @@ const update = () => {
 }
 
 /* 编辑按钮样式：白色文字、紧凑布局 */
-.avatar-edit-btn .el-button {
+:deep(.avatar-edit-btn .el-button) {
     color: #fff;
     padding: 0;
 }
@@ -193,17 +193,17 @@ const update = () => {
     padding: 0 20px;
 }
 
-.el-form-item {
+:deep(.el-form .el-form-item) {
     margin-bottom: 20px;
 }
 
-.el-input__wrapper {
+:deep(.el-form .el-form-item .el-input .el-input__wrapper) {
     border-radius: 4px;
     border-color: #ddd;
     transition: all 0.3s ease;
 }
 
-.el-input__wrapper:focus {
+:deep(.el-form .el-form-item .el-input .el-input__wrapper:focus) {
     border-color: #409eff;
     box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
 }
