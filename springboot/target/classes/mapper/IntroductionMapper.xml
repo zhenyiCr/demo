@@ -6,21 +6,23 @@
 
 
     <select id="selectAll" resultType="com.example.entity.Introduction">
-        select * from `introduction`
+        select `introduction`.*,`category`.title as categoryTitle,`user`.name as userName from `introduction`
+        left join `category` on `introduction`.category_id=`category`.id
+        left join `user` on `introduction`.user_id=`user`.id
         <where>
             <if test="title != null and title !='' ">title like '%${title}%'</if>
-            <if test="content != null and content !='' ">and content like '%${content}%'</if>
+            <if test="userId != null">and `introduction`.user_id=#{userId}</if>
         </where>
         order by id desc
     </select>
 
     <insert id="insert">
-        insert into `introduction`(title,img,content,time,category_id)
-        values(#{title},#{img},#{content},#{time},#{categoryId})
+        insert into `introduction`(title,img,content,time,category_id,user_id)
+        values(#{title},#{img},#{content},#{time},#{categoryId},#{userId})
     </insert>
 
     <update id="update">
-        update `introduction` set title=#{title},img=#{img},content=#{content},time=#{time},category_id=#{categoryId} where
+        update `introduction` set title=#{title},img=#{img},content=#{content},time=#{time},category_id=#{categoryId},user_id=#{userId} where
         id=#{id}
     </update>
 

@@ -35,7 +35,8 @@
                                   style="width: 50px; height: 50px;border-radius: 5px; display: block"/>
                     </template>
                 </el-table-column>
-                <el-table-column prop="category" label="类别"/>
+                <el-table-column prop="categoryTitle" label="类别"/>
+                <el-table-column prop="userName" label="发布用户"/>
                 <el-table-column prop="content" label="内容">
                     <template v-slot="scope">
                         <el-button type="primary" size="mini" @click="viewContent(scope.row.content)">查看</el-button>
