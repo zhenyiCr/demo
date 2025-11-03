@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @GetMapping("/selectAll")
-    public Result slectAll(User user) {
+    public Result selectAll(User user) {
         List<User> userList = userService.selectAll(user);
         return Result.success(userList);
     }

@@ -104,9 +104,9 @@ public class UserService {
             throw new CustomerException("原密码错误");
         }
         dbUser.setPassword(changePasswordDTO.getNewPassword());
-        userMapper.update(dbUser);
         // 用新密码重新生成token（关键：密码变更后旧token失效）
         dbUser.setToken(TokenUtils.createToken(dbUser.getId() + "-ADMIN", dbUser.getPassword()));
+        userMapper.update(dbUser);
         return dbUser;
     }
 }
