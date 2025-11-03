@@ -22,7 +22,8 @@ public interface CategoryMapper {
     @Select("select title from `category` where id = #{id}")
     String selectTitle(Category category);
 
-
+    @Select("select title from `category` where id = #{id}")
+    String selectById(String id);
     @Delete("delete from `category` where id = #{id}")
     void deleteById(String id);
 
